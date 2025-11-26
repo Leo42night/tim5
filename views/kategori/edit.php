@@ -35,7 +35,7 @@ if (!isset($kategori)) {
                             <div class="mb-4">
                                 <label for="nama_kategori" class="form-label">Nama Kategori</label>
                                 <input type="text" class="form-control form-control-lg" id="nama_kategori" name="nama_kategori" 
-                                       value="<?= htmlspecialchars($kategori->nama_kategori); ?>" required>
+                                    value="<?= htmlspecialchars($kategori->nama_kategori); ?>" required>
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">

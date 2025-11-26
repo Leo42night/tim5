@@ -20,8 +20,5 @@ $kategori = new Kategori($db);
 $masuk = new TransaksiMasuk($db);
 $keluar = new TransaksiKeluar($db);
 
-// ambil data seperti di dashboard.php
-// ...
-// lalu
 //2. struktur program & arditektur - Pemisahan logika dan tampilan
 include '../views/dashboard.php';

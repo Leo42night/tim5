@@ -31,7 +31,7 @@ if (!isset($transaksiList)) {
                     <i class="bi bi-plus-circle"></i> Tambah Transaksi
                 </a>
                 <a href="TransaksiController.php?action=cetak_laporan&start_date=<?= date('Y-m-01'); ?>&end_date=<?= date('Y-m-d'); ?>" target="_blank" class="btn btn-secondary">
-                     <i class="bi bi-printer"></i> Cetak Laporan Bulan Ini
+                    <i class="bi bi-printer"></i> Cetak Laporan Bulan Ini
                 </a>
             </div>
         </div>
