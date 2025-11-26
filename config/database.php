@@ -16,7 +16,7 @@ class Database {
         $this->port = getenv('MYSQLPORT') ? getenv('MYSQLPORT') : '3306';
         $this->db_name = getenv('MYSQLDATABASE') ? getenv('MYSQLDATABASE') : 'gudang_fashion'; // Samakan nama DB
         $this->username = getenv('MYSQLUSER') ? getenv('MYSQLUSER') : 'root';
-        $this->password = getenv('MYSQLPASSWORD') ? getenv('MYSQLPASSWORD') : 'mkjw4004'; // Password lokal kamu
+        $this->password = getenv('MYSQLPASSWORD') ? getenv('MYSQLPASSWORD') : ''; 
     }
 
     public function getConnection() {
