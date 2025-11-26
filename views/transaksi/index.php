@@ -1,9 +1,9 @@
 <?php
 // views/transaksi/index.php
 
-// Cek apakah variabel $stmt ada dari Controller
-if (!isset($stmt)) {
-    echo "<div class='alert alert-danger'>Error: Silakan akses halaman ini melalui Controller (TransaksiController.php).</div>";
+// Pastikan variabel dari controller ada
+if (!isset($transaksiList)) {
+    echo "<div class='alert alert-danger'>Error: Data transaksi tidak ditemukan. Akses halaman ini melalui TransaksiController.</div>";
     exit;
 }
 ?>
@@ -71,33 +71,36 @@ if (!isset($stmt)) {
                         <tbody>
                             <?php 
                             $no = 1;
-                            // PERBAIKAN: Gunakan $stmt dan while loop
-                            while($row = $stmt->fetch(PDO::FETCH_ASSOC)): 
+
+                            foreach ($transaksiList as $row): 
                             ?>
                             <tr>
                                 <td><?= $no++; ?></td>
                                 <td><span class="badge bg-secondary"><?= htmlspecialchars($row['kode_transaksi'] ?? '-'); ?></span></td>
                                 <td><?= date('d/m/Y', strtotime($row['tanggal'])); ?></td>
                                 <td>
-                                    <strong><?= htmlspecialchars($row['nama_produk']); ?></strong><br>
-                                    <small class="text-muted"><?= htmlspecialchars($row['ukuran']); ?></small>
+                                    <strong><?= htmlspecialchars($row['nama_produk'] ?? '-'); ?></strong><br>
+                                    <small class="text-muted"><?= htmlspecialchars($row['ukuran'] ?? '-'); ?></small>
                                 </td>
                                 <td class="text-center">
-                                    <?php if($row['jenis_transaksi'] == 'masuk'): ?>
+                                    <?php if(($row['jenis_transaksi'] ?? '') == 'masuk'): ?>
                                         <span class="badge bg-success"><i class="bi bi-arrow-down"></i> Masuk</span>
                                     <?php else: ?>
                                         <span class="badge bg-danger"><i class="bi bi-arrow-up"></i> Keluar</span>
                                     <?php endif; ?>
                                 </td>
                                 <td class="text-center fw-bold"><?= $row['jumlah']; ?></td>
-                                <td><?= htmlspecialchars($row['keterangan']); ?></td>
+                                <td><?= htmlspecialchars($row['keterangan'] ?? '-'); ?></td>
                                 <td class="text-center">
-                                    <a href="TransaksiController.php?action=delete&id=<?= $row['id_transaksi']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus transaksi ini?')" title="Hapus">
+                                    <a href="TransaksiController.php?action=delete&id=<?= $row['id_transaksi']; ?>&jenis=<?= $row['jenis_transaksi']; ?>" 
+                                       class="btn btn-danger btn-sm" 
+                                       onclick="return confirm('Yakin ingin menghapus transaksi ini?')" 
+                                       title="Hapus">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </td>
                             </tr>
-                            <?php endwhile; ?>
+                            <?php endforeach; ?>
 
                             <?php if($no == 1): ?>
                             <tr>
