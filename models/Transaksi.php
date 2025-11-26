@@ -1,14 +1,5 @@
 <?php
-/**
- * Abstract Class Transaksi (Parent Class)
- * 
- * Base class untuk semua jenis transaksi
- * Berisi method umum yang dipakai transaksi masuk & keluar
- * 
- * @author Tim SIGUDA
- * @version 2.0
- */
-abstract class Transaksi {
+class Transaksi {
     protected $conn;
     protected $table = "transaksi";
 
@@ -19,35 +10,20 @@ abstract class Transaksi {
     public $tanggal;
     public $keterangan;
 
-    /**
-     * Constructor
-     * @param PDO $db Koneksi database
-     */
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    /**
-     * Method abstract yang harus diimplementasi oleh child class
-     * Digunakan untuk validasi stok sebelum transaksi
-     * 
-     * @return bool True jika valid, False jika tidak valid
-     */
-    abstract public function validateStock();
+    // default
+    public function validateStock() {
+        return true;
+    }
 
-    /**
-     * Method abstract untuk menyimpan transaksi
-     * Setiap child class punya logic berbeda
-     * 
-     * @return bool True jika berhasil, False jika gagal
-     */
-    abstract public function save();
+    // default
+    public function save() {
+        return false;
+    }
 
-    /**
-     * Mengambil semua data transaksi dengan join ke produk
-     * 
-     * @return PDOStatement Result set transaksi
-     */
     public function readAll() {
         $query = "SELECT t.*, p.nama_produk, p.ukuran, p.kode_produk
                   FROM " . $this->table . " t
@@ -58,14 +34,7 @@ abstract class Transaksi {
         $stmt->execute();
         return $stmt;
     }
-    
-    /**
-     * Membaca laporan transaksi berdasarkan range tanggal
-     * 
-     * @param string $start_date Tanggal mulai
-     * @param string $end_date Tanggal akhir
-     * @return PDOStatement Result set laporan
-     */
+
     public function readLaporan($start_date, $end_date) {
         $query = "SELECT t.*, p.nama_produk, p.ukuran, k.nama_kategori
                   FROM " . $this->table . " t
@@ -81,11 +50,6 @@ abstract class Transaksi {
         return $stmt;
     }
 
-    /**
-     * Menghapus data transaksi
-     * 
-     * @return bool True jika berhasil, False jika gagal
-     */
     public function delete() {
         $query = "DELETE FROM " . $this->table . " WHERE id_transaksi = :id_transaksi";
         $stmt = $this->conn->prepare($query);
@@ -93,12 +57,6 @@ abstract class Transaksi {
         return $stmt->execute();
     }
 
-    /**
-     * Method protected untuk INSERT transaksi ke database
-     * Digunakan oleh child class lewat parent::insertToDatabase()
-     * 
-     * @return bool True jika berhasil, False jika gagal
-     */
     protected function insertToDatabase() {
         $query = "INSERT INTO " . $this->table . " 
                   SET id_produk=:id_produk, jenis_transaksi=:jenis_transaksi, 
@@ -106,7 +64,6 @@ abstract class Transaksi {
         
         $stmt = $this->conn->prepare($query);
 
-        // Sanitasi input
         $this->id_produk = htmlspecialchars(strip_tags($this->id_produk));
         $this->jenis_transaksi = htmlspecialchars(strip_tags($this->jenis_transaksi));
         $this->jumlah = htmlspecialchars(strip_tags($this->jumlah));
