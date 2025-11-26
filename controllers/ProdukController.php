@@ -17,6 +17,7 @@ $kategori = new Kategori($db);
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 
+// 4. Fungsionalitas Utama Aplikasi - CRUD (Tambah, ubah, hapus, lihat data)
 switch($action) {
     case 'index':
         $stmt = $produk->readAll();

@@ -3,7 +3,7 @@ class Admin {
     private $conn;
     private $table = "users";
 
-    // PERBAIKAN: Property diset PRIVATE (Encapsulation)
+    // 1. OOP - Menggunakan Encapsulation (property private/protected, getter/setter)
     private $id;
     private $username;
     private $password;
@@ -35,8 +35,8 @@ class Admin {
     // Method Login
     public function login($usernameInput, $passwordInput) {
         $query = "SELECT id, username, password, nama_lengkap, role 
-                  FROM " . $this->table . " 
-                  WHERE username = :username LIMIT 1";
+                FROM " . $this->table . " 
+                WHERE username = :username LIMIT 1";
         
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':username', $usernameInput);
@@ -57,11 +57,11 @@ class Admin {
         return false;
     }
 
-    // Method Tambah Admin
+    // 4. Fungsionalitas Utama Aplikasi - CRUD (Tambah, ubah, hapus)
     public function create() {
         $query = "INSERT INTO " . $this->table . " 
-                  SET username=:username, password=:password, 
-                      nama_lengkap=:nama_lengkap, role=:role";
+                SET username=:username, password=:password, 
+                    nama_lengkap=:nama_lengkap, role=:role";
         
         $stmt = $this->conn->prepare($query);
         
@@ -85,7 +85,7 @@ class Admin {
     // Method Update Admin
     public function update() {
         $query = "UPDATE " . $this->table . " 
-                  SET username=:username, nama_lengkap=:nama_lengkap, role=:role";
+                SET username=:username, nama_lengkap=:nama_lengkap, role=:role";
         
         if(!empty($this->password)) {
             $query .= ", password=:password";

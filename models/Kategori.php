@@ -3,7 +3,7 @@ class Kategori {
     private $conn;
     private $table = "kategori";
 
-    public $id_kategori; // Ganti $id menjadi $id_kategori
+    public $id_kategori;
     public $nama_kategori;
     // public $deskripsi; // Kolom deskripsi tidak ada di database.sql
 
@@ -27,7 +27,7 @@ class Kategori {
     public function readAll() {
         // Ganti 'id' menjadi 'id_kategori' dan hapus kolom yang tidak ada
         $query = "SELECT id_kategori, nama_kategori 
-                  FROM " . $this->table . " ORDER BY nama_kategori ASC"; 
+                FROM " . $this->table . " ORDER BY nama_kategori ASC"; 
         
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -37,7 +37,7 @@ class Kategori {
     public function readOne() {
         // Ganti 'id' menjadi 'id_kategori' dan hapus kolom yang tidak ada
         $query = "SELECT id_kategori, nama_kategori 
-                  FROM " . $this->table . " WHERE id_kategori = :id_kategori LIMIT 1";
+                FROM " . $this->table . " WHERE id_kategori = :id_kategori LIMIT 1";
         
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id_kategori', $this->id_kategori); // Ganti :id menjadi :id_kategori

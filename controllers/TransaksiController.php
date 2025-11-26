@@ -21,9 +21,8 @@ $action = $_GET['action'] ?? 'index';
 
 switch ($action) {
 
-    // ======================
-    // Tampilkan semua transaksi
-    // ======================
+    // menampilkan semua transaksi
+    
     case 'index':
         $transaksiMasuk = new TransaksiMasuk($db);
         $transaksiKeluar = new TransaksiKeluar($db);
@@ -44,9 +43,7 @@ switch ($action) {
         include '../views/transaksi/index.php';
         break;
 
-    // ======================
     // Tambah transaksi baru
-    // ======================
     case 'create':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $jenis = $_POST['jenis_transaksi'] ?? 'masuk';
@@ -79,9 +76,7 @@ switch ($action) {
         include '../views/transaksi/create.php';
         break;
 
-    // ======================
     // Hapus transaksi
-    // ======================
     case 'delete':
         if (isset($_GET['id'], $_GET['jenis'])) {
             $jenis = $_GET['jenis'];
@@ -97,9 +92,7 @@ switch ($action) {
         header("Location: TransaksiController.php");
         exit();
 
-    // ======================
     // Cetak laporan transaksi
-    // ======================
     case 'cetak_laporan':
         $start_date = $_GET['start_date'] ?? date('Y-m-01');
         $end_date = $_GET['end_date'] ?? date('Y-m-d');
@@ -112,7 +105,7 @@ switch ($action) {
 
         $data = array_merge($dataMasuk, $dataKeluar);
 
-        // Urutkan berdasarkan tanggal ASC
+        // Urutkan berdasarkan tanggal 
         usort($data, function($a, $b) {
             return strtotime($a['tanggal']) - strtotime($b['tanggal']);
         });
