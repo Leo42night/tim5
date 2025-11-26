@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Jika sudah login, langsung lempar ke Dashboard
+// Jika sudah login, langsung  ke Dashboard
 if(isset($_SESSION['user_id'])) {
     header("Location: views/dashboard.php");
     exit();

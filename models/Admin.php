@@ -31,7 +31,6 @@ class Admin {
 
     public function getRole() { return $this->role; }
     public function setRole($role) { $this->role = $role; }
-    // --------------------------------------------------
 
     // Method Login
     public function login($usernameInput, $passwordInput) {
