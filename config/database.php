@@ -1,7 +1,7 @@
 <?php
 
 class Database {
-    // 1. Properti Private (Encapsulation-penerapan konsep OOP)
+    // 1. Properti Private
     private $host;
     private $db_name;
     private $username;
@@ -11,33 +11,35 @@ class Database {
     public $conn;
 
     public function __construct() {
-        // 7. konfigurasi host, port, DB, username, dan password. 
-    
-        $this->host = getenv('MYSQLHOST') ? getenv('MYSQLHOST') : 'localhost';
-        $this->port = getenv('MYSQLPORT') ? getenv('MYSQLPORT') : '3306';
-        $this->db_name = getenv('MYSQLDATABASE') ? getenv('MYSQLDATABASE') : 'gudang_fashion'; // Samakan nama DB
-        $this->username = getenv('MYSQLUSER') ? getenv('MYSQLUSER') : 'root';
-        $this->password = getenv('MYSQLPASSWORD') ? getenv('MYSQLPASSWORD') : 'mkjw4004'; // Password lokal kamu
+        // 7. Konfigurasi: Mengambil dari Environment Variables (Vercel/Supabase)
+        // Jika tidak ada di env (lokal), gunakan default string kosong atau nilai defaultmu
+        
+        $this->host = getenv('DB_HOST');
+        $this->port = getenv('DB_PORT') ? getenv('DB_PORT') : '5432'; // Port default Postgres
+        $this->db_name = getenv('DB_DATABASE') ? getenv('DB_DATABASE') : 'postgres';
+        $this->username = getenv('DB_USERNAME');
+        $this->password = getenv('DB_PASSWORD');
     }
 
     public function getConnection() {
         $this->conn = null;
         
         try {
-            // Data Source Name (DSN)
-            $dsn = "mysql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->db_name . ";charset=utf8mb4";
+            // PENTING: Menggunakan driver 'pgsql' untuk PostgreSQL (Supabase)
+            // Format DSN: pgsql:host=...;port=...;dbname=...
+            $dsn = "pgsql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->db_name;
             
             // 5. Inisialisasi PDO
             $this->conn = new PDO($dsn, $this->username, $this->password);
             
-            // Set Error Mode ke Exception (Penting untuk Debugging)
+            // Set Error Mode ke Exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-            // Opsional: Set fetch mode default ke Associative Array (Biar coding lebih rapi nanti)
+            // Set fetch mode default ke Associative Array
             $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
         } catch(PDOException $exception) {
-            // Best Practice: Jangan echo error mentah ke user di production, tapi untuk kuliah ini oke.
+            // Tampilkan pesan error jika koneksi gagal
             echo "Database Connection Error: " . $exception->getMessage();
         }
 
