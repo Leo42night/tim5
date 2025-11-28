@@ -2,7 +2,6 @@
 abstract class Transaksi {
     protected $conn;
     protected $table = "transaksi";
-
     public $id_transaksi;
     public $id_produk;
     public $jenis_transaksi;
