@@ -142,3 +142,9 @@ Opsi 2: Apache/Nginx
 dokumen : https://docs.google.com/document/d/1mTMhX8uBaTI0z1bTFjYZ2TCWiV2GJZW7ITvg3r7dA1o/edit?tab=t.0
 
 Repository github: https://github.com/Blackpa77/TUBES_PPBO_SIGUDA
+
+Demo : https://drive.google.com/file/d/11hGy3fDN1dMsLLIxJcppz2fa6ZidSn7w/view?usp=sharing 
+
+Video presentasi : https://drive.google.com/file/d/11hGy3fDN1dMsLLIxJcppz2fa6ZidSn7w/view?usp=sharing 
+
+
