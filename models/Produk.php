@@ -2,21 +2,55 @@
 class Produk {
     private $conn;
     private $table = "produk";
-    public $id_produk;
-    public $id_kategori;
-    public $kode_produk;
-    public $nama_produk;
-    public $ukuran;
-    public $warna;
-    public $stok;
-    public $harga_beli;
-    public $harga_jual;
-    public $deskripsi;
+    
+    // 1. ENCAPSULATION: Semua property PRIVATE
+    private $id_produk;
+    private $id_kategori;
+    private $kode_produk;
+    private $nama_produk;
+    private $ukuran;
+    private $warna;
+    private $stok;
+    private $harga_beli;
+    private $harga_jual;
+    private $deskripsi;
 
     public function __construct($db) {
         $this->conn = $db;
     }
 
+    // 2. GETTER & SETTER untuk setiap property
+    public function getIdProduk() { return $this->id_produk; }
+    public function setIdProduk($id) { $this->id_produk = $id; }
+
+    public function getIdKategori() { return $this->id_kategori; }
+    public function setIdKategori($id) { $this->id_kategori = $id; }
+
+    public function getKodeProduk() { return $this->kode_produk; }
+    public function setKodeProduk($kode) { $this->kode_produk = $kode; }
+
+    public function getNamaProduk() { return $this->nama_produk; }
+    public function setNamaProduk($nama) { $this->nama_produk = $nama; }
+
+    public function getUkuran() { return $this->ukuran; }
+    public function setUkuran($ukuran) { $this->ukuran = $ukuran; }
+
+    public function getWarna() { return $this->warna; }
+    public function setWarna($warna) { $this->warna = $warna; }
+
+    public function getStok() { return $this->stok; }
+    public function setStok($stok) { $this->stok = $stok; }
+
+    public function getHargaBeli() { return $this->harga_beli; }
+    public function setHargaBeli($harga) { $this->harga_beli = $harga; }
+
+    public function getHargaJual() { return $this->harga_jual; }
+    public function setHargaJual($harga) { $this->harga_jual = $harga; }
+
+    public function getDeskripsi() { return $this->deskripsi; }
+    public function setDeskripsi($deskripsi) { $this->deskripsi = $deskripsi; }
+
+    // Method CRUD tetap sama, tapi akses property via $this->
     public function create() {
         $query = "INSERT INTO {$this->table} 
                 SET id_kategori=:id_kategori, kode_produk=:kode_produk, 
@@ -53,9 +87,16 @@ class Produk {
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if($row) {
-            foreach ($row as $key => $val) {
-                if(property_exists($this, $key)) $this->$key = $val;
-            }
+            $this->id_produk = $row['id_produk'];
+            $this->id_kategori = $row['id_kategori'];
+            $this->kode_produk = $row['kode_produk'];
+            $this->nama_produk = $row['nama_produk'];
+            $this->ukuran = $row['ukuran'];
+            $this->warna = $row['warna'];
+            $this->stok = $row['stok'];
+            $this->harga_beli = $row['harga_beli'];
+            $this->harga_jual = $row['harga_jual'];
+            $this->deskripsi = $row['deskripsi'];
             return true;
         }
         return false;

@@ -25,16 +25,16 @@ switch($action) {
         
     case 'create':
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // ... (kode simpan data seperti sebelumnya) ...
-            $produk->id_kategori = $_POST['kategori_id'];
-            $produk->kode_produk = $_POST['kode_produk'];
-            $produk->nama_produk = $_POST['nama_produk'];
-            $produk->ukuran = $_POST['ukuran'];
-            $produk->warna = $_POST['warna'];
-            $produk->stok = $_POST['stok'];
-            $produk->harga_beli = $_POST['harga_beli'];
-            $produk->harga_jual = $_POST['harga_jual'];
-            $produk->deskripsi = $_POST['deskripsi'];
+            // 3. BUKTI ENCAPSULATION: Menggunakan SETTER untuk set data
+            $produk->setIdKategori($_POST['kategori_id']);
+            $produk->setKodeProduk($_POST['kode_produk']);
+            $produk->setNamaProduk($_POST['nama_produk']);
+            $produk->setUkuran($_POST['ukuran']);
+            $produk->setWarna($_POST['warna']);
+            $produk->setStok($_POST['stok']);
+            $produk->setHargaBeli($_POST['harga_beli']);
+            $produk->setHargaJual($_POST['harga_jual']);
+            $produk->setDeskripsi($_POST['deskripsi']);
             
             if($produk->create()) {
                 $_SESSION['success'] = "Produk berhasil ditambahkan";
@@ -45,29 +45,27 @@ switch($action) {
             }
         }
         
-        // mengambil data kategori agar dropdown tidak error
-        // Kita gunakan nama variabel $stmt_kategori
         $stmt_kategori = $kategori->readAll(); 
-        
         include '../views/produk/create.php';
         break;
         
     case 'edit':
         if(isset($_GET['id'])) {
-            // PERBAIKAN: Gunakan id_produk
-            $produk->id_produk = $_GET['id'];
+            // Set ID menggunakan setter
+            $produk->setIdProduk($_GET['id']);
             $produk->readOne();
             
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $produk->id_kategori = $_POST['kategori_id'];
-                $produk->kode_produk = $_POST['kode_produk'];
-                $produk->nama_produk = $_POST['nama_produk'];
-                $produk->ukuran = $_POST['ukuran'];
-                $produk->warna = $_POST['warna'];
-                $produk->stok = $_POST['stok'];
-                $produk->harga_beli = $_POST['harga_beli'];
-                $produk->harga_jual = $_POST['harga_jual'];
-                $produk->deskripsi = $_POST['deskripsi'];
+                // Update menggunakan setter
+                $produk->setIdKategori($_POST['kategori_id']);
+                $produk->setKodeProduk($_POST['kode_produk']);
+                $produk->setNamaProduk($_POST['nama_produk']);
+                $produk->setUkuran($_POST['ukuran']);
+                $produk->setWarna($_POST['warna']);
+                $produk->setStok($_POST['stok']);
+                $produk->setHargaBeli($_POST['harga_beli']);
+                $produk->setHargaJual($_POST['harga_jual']);
+                $produk->setDeskripsi($_POST['deskripsi']);
                 
                 if($produk->update()) {
                     $_SESSION['success'] = "Produk berhasil diupdate";
@@ -84,8 +82,7 @@ switch($action) {
         
     case 'delete':
         if(isset($_GET['id'])) {
-            // PERBAIKAN: Gunakan id_produk
-            $produk->id_produk = $_GET['id'];
+            $produk->setIdProduk($_GET['id']);
             
             if($produk->delete()) {
                 $_SESSION['success'] = "Produk berhasil dihapus";
@@ -97,8 +94,15 @@ switch($action) {
         exit();
         
     case 'cetak':
+        // Cetak HTML (untuk print browser)
         $stmt = $produk->readAll();
         include '../views/produk/cetak.php';
+        break;
+    
+    case 'cetak_pdf':
+        // Export ke PDF menggunakan DOMPDF
+        $stmt = $produk->readAll();
+        include '../views/produk/cetak_pdf.php';
         break;
         
     default:

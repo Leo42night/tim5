@@ -21,9 +21,9 @@ abstract class Transaksi {
     // Ambil semua transaksi
     public function readAll() {
         $query = "SELECT t.*, p.nama_produk, p.ukuran, p.kode_produk
-                  FROM " . $this->table . " t
-                  JOIN produk p ON t.id_produk = p.id_produk
-                  ORDER BY t.tanggal DESC, t.id_transaksi DESC";
+                FROM " . $this->table . " t
+                JOIN produk p ON t.id_produk = p.id_produk
+                ORDER BY t.tanggal DESC, t.id_transaksi DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
@@ -32,8 +32,8 @@ abstract class Transaksi {
     // Insert ke database
     protected function insertToDatabase() {
         $query = "INSERT INTO " . $this->table . " 
-                  SET id_produk=:id_produk, jenis_transaksi=:jenis_transaksi, 
-                      jumlah=:jumlah, tanggal=:tanggal, keterangan=:keterangan";
+                SET id_produk=:id_produk, jenis_transaksi=:jenis_transaksi, 
+                    jumlah=:jumlah, tanggal=:tanggal, keterangan=:keterangan";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id_produk', $this->id_produk);
         $stmt->bindParam(':jenis_transaksi', $this->jenis_transaksi);
@@ -54,10 +54,10 @@ abstract class Transaksi {
     // Untuk laporan
     public function readLaporan($start_date, $end_date) {
         $query = "SELECT t.*, p.nama_produk, p.ukuran, p.kode_produk
-                  FROM " . $this->table . " t
-                  JOIN produk p ON t.id_produk = p.id_produk
-                  WHERE t.tanggal BETWEEN :start_date AND :end_date
-                  ORDER BY t.tanggal ASC";
+                FROM " . $this->table . " t
+                JOIN produk p ON t.id_produk = p.id_produk
+                WHERE t.tanggal BETWEEN :start_date AND :end_date
+                ORDER BY t.tanggal ASC";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':start_date', $start_date);
         $stmt->bindParam(':end_date', $end_date);
