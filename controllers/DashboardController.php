@@ -8,7 +8,7 @@ require_once '../models/Kategori.php';
 
 
 // 4. fungsionalitas utama aplikasi - Autentikasi / login
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) { // mengecek apakah user sudah login atau belum
     header("Location: ../index.php");
     exit();
 }

@@ -17,7 +17,7 @@ $database = new Database();
 $db = $database->getConnection();
 $produk = new Produk($db);
 
-$action = $_GET['action'] ?? 'index';
+$action = $_GET['action'] ?? 'index'; //get untuk medapatkan data
 
 switch ($action) {
 
