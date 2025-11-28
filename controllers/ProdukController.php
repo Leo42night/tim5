@@ -5,7 +5,7 @@ require_once '../config/database.php';
 require_once '../models/Produk.php';
 require_once '../models/Kategori.php';
 
-if(!isset($_SESSION['user_id'])) {
+if(!isset($_SESSION['user_id'])) { // untuk mengecek apakah user sudah login atau belum
     header("Location: ../index.php");
     exit();
 }

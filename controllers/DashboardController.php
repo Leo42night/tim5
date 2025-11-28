@@ -21,7 +21,7 @@ $masuk = new TransaksiMasuk($db);
 $keluar = new TransaksiKeluar($db);
 
 // ambil data seperti di dashboard.php
-// ...
+// 
 // lalu
-//2. struktur program & arditektur - Pemisahan logika dan tampilan
+//2. struktur program & arsitektur - Pemisahan logika dan tampilan
 include '../views/dashboard.php';
