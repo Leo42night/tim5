@@ -8,7 +8,7 @@ require_once '../models/Kategori.php';
 
 
 // 4. fungsionalitas utama aplikasi - Autentikasi / login
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) { // mengecek apakah user sudah login atau belum
     header("Location: ../index.php");
     exit();
 }
@@ -21,7 +21,7 @@ $masuk = new TransaksiMasuk($db);
 $keluar = new TransaksiKeluar($db);
 
 // ambil data seperti di dashboard.php
-// ...
+// 
 // lalu
-//2. struktur program & arditektur - Pemisahan logika dan tampilan
+//2. struktur program & arsitektur - Pemisahan logika dan tampilan
 include '../views/dashboard.php';
