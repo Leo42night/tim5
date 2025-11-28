@@ -138,7 +138,7 @@ Opsi 1: PHP Built-in Server
 bashphp -S localhost:8000
 Opsi 2: Apache/Nginx
 
-# folder project
-Akses via https://docs.google.com/document/d/1mTMhX8uBaTI0z1bTFjYZ2TCWiV2GJZW7ITvg3r7dA1o/edit?tab=t.0
+# project
+dokumen : https://docs.google.com/document/d/1mTMhX8uBaTI0z1bTFjYZ2TCWiV2GJZW7ITvg3r7dA1o/edit?tab=t.0
 
-Repository: https://github.com/Blackpa77/TUBES_PPBO_SIGUDA
+Repository github: https://github.com/Blackpa77/TUBES_PPBO_SIGUDA
