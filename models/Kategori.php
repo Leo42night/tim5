@@ -5,7 +5,6 @@ class Kategori {
 
     public $id_kategori;
     public $nama_kategori;
-    // public $deskripsi; // Kolom deskripsi tidak ada di database.sql
 
     public function __construct($db) {
         $this->conn = $db;

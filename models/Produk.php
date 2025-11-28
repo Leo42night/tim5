@@ -70,9 +70,16 @@ class Produk {
         
         // Logika untuk mengisi properti objek
         if($row) {
-            foreach ($row as $key => $val) {
-                if(property_exists($this, $key)) $this->$key = $val;
-            }
+            $this->id_produk = $row['id_produk'];
+            $this->id_kategori = $row['id_kategori'];
+            $this->kode_produk = $row['kode_produk'];
+            $this->nama_produk = $row['nama_produk'];
+            $this->ukuran = $row['ukuran'];
+            $this->warna = $row['warna'];
+            $this->stok = $row['stok'];
+            $this->harga_beli = $row['harga_beli'];
+            $this->harga_jual = $row['harga_jual'];
+            $this->deskripsi = $row['deskripsi'];
             return true;
         }
         return false;

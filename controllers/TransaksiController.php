@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); //function superglobal dari objek sesision
 
 require_once '../config/database.php';
 require_once '../models/TransaksiMasuk.php';
@@ -7,7 +7,7 @@ require_once '../models/TransaksiKeluar.php';
 require_once '../models/Produk.php';
 
 // Cek session user
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) { // untuk autentikasi (userlogin)
     header("Location: ../index.php");
     exit();
 }
@@ -17,7 +17,7 @@ $database = new Database();
 $db = $database->getConnection();
 $produk = new Produk($db);
 
-$action = $_GET['action'] ?? 'index';
+$action = $_GET['action'] ?? 'index'; //get untuk medapatkan data
 
 switch ($action) {
 

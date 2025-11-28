@@ -1,6 +1,5 @@
 <?php
 // views/produk/edit.php
-// Pastikan akses melalui Controller
 if (!isset($produk)) {
     exit("Error: Akses langsung tidak diizinkan.");
 }
@@ -32,10 +31,9 @@ if (!isset($produk)) {
                                 <select name="kategori_id" class="form-select" required>
                                     <option value="">-- Pilih Kategori --</option>
                                     <?php 
-                                    // Menampilkan daftar kategori di dropdown
                                     while($kat = $stmt_kategori->fetch(PDO::FETCH_ASSOC)): 
-                                        // Cek jika kategori ini adalah kategori produk saat ini, maka select
-                                        $selected = ($kat['id_kategori'] == $produk->id_kategori) ? 'selected' : '';
+                                        // 4. BUKTI ENCAPSULATION: Menggunakan GETTER
+                                        $selected = ($kat['id_kategori'] == $produk->getIdKategori()) ? 'selected' : '';
                                     ?>
                                     <option value="<?= $kat['id_kategori']; ?>" <?= $selected; ?>>
                                         <?= $kat['nama_kategori']; ?>
@@ -47,49 +45,56 @@ if (!isset($produk)) {
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Kode Produk</label>
-                                    <input type="text" name="kode_produk" class="form-control" value="<?= htmlspecialchars($produk->kode_produk ?? ''); ?>" required>
+                                    <input type="text" name="kode_produk" class="form-control" 
+                                           value="<?= htmlspecialchars($produk->getKodeProduk()); ?>" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Nama Produk</label>
-                                    <input type="text" name="nama_produk" class="form-control" value="<?= htmlspecialchars($produk->nama_produk); ?>" required>
+                                    <input type="text" name="nama_produk" class="form-control" 
+                                           value="<?= htmlspecialchars($produk->getNamaProduk()); ?>" required>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Ukuran</label>
-                                    <input type="text" name="ukuran" class="form-control" value="<?= htmlspecialchars($produk->ukuran); ?>" required>
+                                    <input type="text" name="ukuran" class="form-control" 
+                                           value="<?= htmlspecialchars($produk->getUkuran()); ?>" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Warna</label>
-                                    <input type="text" name="warna" class="form-control" value="<?= htmlspecialchars($produk->warna ?? '-'); ?>">
+                                    <input type="text" name="warna" class="form-control" 
+                                           value="<?= htmlspecialchars($produk->getWarna()); ?>">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Stok</label>
-                                    <input type="number" name="stok" class="form-control" value="<?= $produk->stok; ?>" required>
+                                    <input type="number" name="stok" class="form-control" 
+                                           value="<?= $produk->getStok(); ?>" required>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Harga Beli</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp</span>
-                                        <input type="number" name="harga_beli" class="form-control" value="<?= $produk->harga_beli ?? 0; ?>" required>
+                                        <input type="number" name="harga_beli" class="form-control" 
+                                               value="<?= $produk->getHargaBeli(); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Harga Jual</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp</span>
-                                        <input type="number" name="harga_jual" class="form-control" value="<?= $produk->harga_jual ?? 0; ?>" required>
+                                        <input type="number" name="harga_jual" class="form-control" 
+                                               value="<?= $produk->getHargaJual(); ?>" required>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Deskripsi</label>
-                                <textarea name="deskripsi" class="form-control" rows="3"><?= htmlspecialchars($produk->deskripsi ?? ''); ?></textarea>
+                                <textarea name="deskripsi" class="form-control" rows="3"><?= htmlspecialchars($produk->getDeskripsi()); ?></textarea>
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
