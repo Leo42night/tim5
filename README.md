@@ -148,6 +148,11 @@ php -S localhost:8080
 - run `vercel --prod` (bisa koneksi ke repo github untuk auto run), atau push ke repo github lalu buat proyek langsung di [vercel.com](https://vercel.com/)
 - setup database: jika pakai `supabase`, run `db-pg.sql` di **SQL Editor** supabase, sesuaikan konfigurasi `DB_*` seperti pada contoh di `.env.prod.example`, dan paste-kan ke dalam **vercel environment variable**
 
+### Cara Deploy ke Railway & Database (Supaase or Mysql)
+- Push ke github repo, lalu buat proyek di [railway](https://railway.com/new).
+- Create juga Database di project yang sama. Sesuaikan .env berdasarkan tipe database yang dipilih.
+- Untuk run setup Query SQL, koneksikan ke GUI local. Jika pakai HeidiSQL dan DB Railway adalah MySQL: gunakan konfigurasi mysql://<user>:<password>@<host>:<port>. di Heidi, gunakan lib **mariadb.dll**.
+
 ## Link Project
 - [Dokumen Laporan](https://docs.google.com/document/d/1mTMhX8uBaTI0z1bTFjYZ2TCWiV2GJZW7ITvg3r7dA1o/edit?tab=t.0)
 - [Demo](https://drive.google.com/file/d/11hGy3fDN1dMsLLIxJcppz2fa6ZidSn7w/view?usp=sharing) 

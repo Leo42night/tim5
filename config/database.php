@@ -2,7 +2,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../"); # __DIR__ = directory saat ini
-$dotenv->load(); 
+$dotenv->safeLoad(); 
 # akan mengisi $_ENV, $_SERVER, dan menjalankan setenv()
 
 class Database {
