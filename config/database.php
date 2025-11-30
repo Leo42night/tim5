@@ -19,9 +19,9 @@ class Database {
         // var_dump('TEST .env is loaded: ', $_ENV['DB_DRIVER']); // untuk test: lihat respon di bagian network browser 
         $this->host = getenv('DB_HOST') ?: 'localhost';
         $this->port = getenv('DB_PORT') ?: '3306';
-        $this->db_name = getenv('DB_DATABASE') ?: 'gudang_fashion';
-        $this->username = getenv('DB_USERNAME') ?: 'root';
-        $this->password = getenv('DB_PASSWORD') ?: '';
+        $this->db_name = getenv('DB_NAME') ?: 'gudang_fashion';
+        $this->username = getenv('DB_USER') ?: 'root';
+        $this->password = getenv('DB_PASS') ?: '';
     }
 
     public function getConnection() {
