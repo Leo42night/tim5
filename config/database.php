@@ -1,4 +1,9 @@
 <?php
+require __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../"); # __DIR__ = directory saat ini
+$dotenv->load(); 
+# akan mengisi $_ENV, $_SERVER, dan menjalankan setenv()
 
 class Database {
     // 1. Properti Private
@@ -11,14 +16,12 @@ class Database {
     public $conn;
 
     public function __construct() {
-        // 7. Konfigurasi: Mengambil dari Environment Variables (Vercel/Supabase)
-        // Jika tidak ada di env (lokal), gunakan default string kosong atau nilai defaultmu
-        
-        $this->host = getenv('DB_HOST');
-        $this->port = getenv('DB_PORT') ? getenv('DB_PORT') : '5432'; // Port default Postgres
-        $this->db_name = getenv('DB_DATABASE') ? getenv('DB_DATABASE') : 'postgres';
-        $this->username = getenv('DB_USERNAME');
-        $this->password = getenv('DB_PASSWORD');
+        // var_dump('TEST .env is loaded: ', $_ENV['DB_DRIVER']); // untuk test: lihat respon di bagian network browser 
+        $this->host = getenv('DB_HOST') ?: 'localhost';
+        $this->port = getenv('DB_PORT') ?: '3306';
+        $this->db_name = getenv('DB_DATABASE') ?: 'gudang_fashion';
+        $this->username = getenv('DB_USERNAME') ?: 'root';
+        $this->password = getenv('DB_PASSWORD') ?: '';
     }
 
     public function getConnection() {
@@ -26,8 +29,7 @@ class Database {
         
         try {
             // PENTING: Menggunakan driver 'pgsql' untuk PostgreSQL (Supabase)
-            // Format DSN: pgsql:host=...;port=...;dbname=...
-            $dsn = "pgsql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->db_name;
+            $dsn = "{$_ENV['DB_DRIVER']}:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->db_name . ";sslmode={$_ENV['DB_SSLMODE']}";
             
             // 5. Inisialisasi PDO
             $this->conn = new PDO($dsn, $this->username, $this->password);

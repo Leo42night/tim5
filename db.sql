@@ -76,6 +76,6 @@ INSERT INTO transaksi (id_produk, jenis_transaksi, jumlah, tanggal, keterangan, 
 (2, 'keluar', 20, '2025-01-22', 'Penjualan toko', 'T-K-002');
 
 -- Inisialisasi user admin
--- Password 'admin123' dengan hash: $2y$10$wE.6oH0s/4q7QyGvT1O5u.gO7D2H4P5g2Q7V5L4X1G4O0Y8Z6J1F8K
+-- Password 'admin123' dengan hash: $2y$10$WohKMED8JPn10ZMbIUr4peJRQFAUu6Gu4Z7IymWxBkRywXvlKoK3e
 INSERT INTO users (username, password, nama_lengkap, role) VALUES 
-('admin', '$2y$10$wE.6oH0s/4q7QyGvT1O5u.gO7D2H4P5g2Q7V5L4X1G4O0Y8Z6J1F8K', 'Administrator', 'admin');
+('admin', '$2y$10$WohKMED8JPn10ZMbIUr4peJRQFAUu6Gu4Z7IymWxBkRywXvlKoK3e', 'Administrator', 'admin');

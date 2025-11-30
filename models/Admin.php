@@ -44,6 +44,9 @@ class Admin {
 
         if($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $pass = password_hash("admin123", PASSWORD_DEFAULT);
+            var_dump("PASS: ", $pass); 
+            var_dump("ROW: ", $row['password']);
             // Verifikasi password hash
             if(password_verify($passwordInput, $row['password'])) {
                 // Set data ke property private lewat setter/langsung

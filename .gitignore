@@ -3,3 +3,5 @@ vendor/
 .env.local
 *.log
 .DS_Store
+.env.prod
+.vercel
